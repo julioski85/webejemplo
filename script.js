@@ -206,51 +206,61 @@
   }
 
 
-  // Industries auto horizontal slider
+  // Industries horizontal slider (auto + arrows)
   const industries = document.querySelector('[data-industries-slider]');
   if (industries) {
-    const cards = Array.from(industries.querySelectorAll('.mini'));
-    if (cards.length) {
-      cards.forEach((card) => industries.appendChild(card.cloneNode(true)));
-      industries.classList.add('is-animated');
-      industries.addEventListener('pointerenter', () => { industries.style.animationPlayState = 'paused'; });
-      industries.addEventListener('pointerleave', () => { industries.style.animationPlayState = 'running'; });
-    }
-  }
-
-  // Testimonials carousel (3 cards + auto scroll)
-  const testimonials = document.querySelector('[data-testimonials-slider]');
-  if (testimonials) {
-    const cards = Array.from(testimonials.querySelectorAll('.quote'));
-    let start = 0;
+    const track = industries.querySelector('[data-industries-track]');
+    const prev = industries.querySelector('[data-industry-prev]');
+    const next = industries.querySelector('[data-industry-next]');
     let timer;
 
-    const visibleCount = () => (window.innerWidth <= 980 ? 1 : 3);
-
-    const render = () => {
-      const count = visibleCount();
-      cards.forEach((card, i) => {
-        const visible = ((i - start + cards.length) % cards.length) < count;
-        card.classList.toggle('is-visible', visible);
-      });
-    };
-
-    const next = () => {
-      start = (start + 1) % cards.length;
-      render();
+    const getStep = () => Math.max((track?.clientWidth || 0) * 0.86, 260);
+    const move = (dir = 1) => {
+      if (!track) return;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 0) return;
+      const target = track.scrollLeft + getStep() * dir;
+      const shouldWrap = dir > 0 ? target >= maxScroll - 4 : target <= 0;
+      if (shouldWrap) {
+        track.scrollTo({ left: dir > 0 ? 0 : maxScroll, behavior: 'smooth' });
+        return;
+      }
+      track.scrollBy({ left: getStep() * dir, behavior: 'smooth' });
     };
 
     const resetAuto = () => {
       window.clearInterval(timer);
-      timer = window.setInterval(next, 4200);
+      timer = window.setInterval(() => move(1), 3200);
     };
 
-    window.addEventListener('resize', render);
-    testimonials.addEventListener('pointerenter', () => window.clearInterval(timer));
-    testimonials.addEventListener('pointerleave', resetAuto);
-
-    render();
+    prev?.addEventListener('click', () => {
+      move(-1);
+      resetAuto();
+    });
+    next?.addEventListener('click', () => {
+      move(1);
+      resetAuto();
+    });
+    track?.addEventListener('pointerenter', () => window.clearInterval(timer));
+    track?.addEventListener('pointerleave', resetAuto);
     resetAuto();
+  }
+
+  // Testimonials horizontal infinite loop
+  const testimonials = document.querySelector('[data-testimonials-slider]');
+  if (testimonials) {
+    const track = testimonials.querySelector('[data-testimonials-track]');
+    const cards = track ? Array.from(track.children) : [];
+    if (track && cards.length > 1) {
+      cards.forEach((card) => track.appendChild(card.cloneNode(true)));
+      testimonials.classList.add('is-animated');
+      testimonials.addEventListener('pointerenter', () => {
+        track.style.animationPlayState = 'paused';
+      });
+      testimonials.addEventListener('pointerleave', () => {
+        track.style.animationPlayState = 'running';
+      });
+    }
   }
 
   // Form (frontend success message only)
