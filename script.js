@@ -9,6 +9,49 @@
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 
+  // Theme mode (dark/light)
+  const rootBody = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeToggleMobile = document.getElementById('themeToggleMobile');
+  const savedTheme = localStorage.getItem('abitalia-theme');
+  if (savedTheme) rootBody.setAttribute('data-theme', savedTheme);
+
+  const syncThemeIcon = () => {
+    const isDark = rootBody.getAttribute('data-theme') === 'dark';
+    const icon = isDark ? '☀️' : '🌙';
+    if (themeToggle) themeToggle.textContent = icon;
+    if (themeToggleMobile) themeToggleMobile.textContent = `${icon} Cambiar tema`;
+  };
+  const toggleTheme = () => {
+    const next = rootBody.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    rootBody.setAttribute('data-theme', next);
+    localStorage.setItem('abitalia-theme', next);
+    syncThemeIcon();
+  };
+  themeToggle?.addEventListener('click', toggleTheme);
+  themeToggleMobile?.addEventListener('click', toggleTheme);
+  if (!rootBody.getAttribute('data-theme')) rootBody.setAttribute('data-theme', 'light');
+  syncThemeIcon();
+
+  // Loader
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', () => {
+    if (!preloader) return;
+    preloader.classList.add('is-hidden');
+    window.setTimeout(() => preloader.remove(), 500);
+  });
+
+  // Scroll to top
+  const scrollTopBtn = document.getElementById('scrollTop');
+  const syncScrollTop = () => {
+    if (!scrollTopBtn) return;
+    scrollTopBtn.classList.toggle('is-visible', window.scrollY > 260);
+  };
+  window.addEventListener('scroll', syncScrollTop, { passive: true });
+  scrollTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  syncScrollTop();
+
+
   // Mobile nav (dropdown) — only on mobile
   const burger = document.querySelector('.burger');
   const mobile = document.querySelector('.mobile');

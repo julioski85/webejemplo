@@ -18,6 +18,16 @@
   --shadow2: 0 12px 40px rgba(15,17,21,.08);
 }
 
+body[data-theme="dark"]{
+  --bg:#0c0f14;
+  --panel:#11161d;
+  --soft:#10151c;
+  --text:#f2f5f8;
+  --muted:#b8c0cc;
+  --line:rgba(255,255,255,.14);
+  --line2:rgba(255,255,255,.22);
+}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -41,6 +51,57 @@ a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
 code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
 
+.preloader{
+  position:fixed;
+  inset:0;
+  background:rgba(9,12,16,.96);
+  display:grid;
+  place-items:center;
+  z-index:9999;
+  transition:opacity .45s ease, visibility .45s ease;
+}
+.preloader.is-hidden{opacity:0; visibility:hidden}
+.preloader__logo-wrap{position:relative; width:140px; height:140px; display:grid; place-items:center}
+.preloader__logo{width:86px; filter:brightness(0) invert(1)}
+.preloader__ring{
+  position:absolute; inset:0;
+  border:2px solid rgba(255,255,255,.12);
+  border-top-color:rgba(255,255,255,.9);
+  border-radius:999px;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.theme-toggle{
+  width:42px; height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  cursor:pointer;
+}
+.theme-toggle--mobile{width:100%; border-radius:14px; padding:10px 14px; height:auto; color:#fff; text-align:left}
+
+.scroll-top{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  border:1px solid var(--line2);
+  background:linear-gradient(135deg, rgba(15,17,21,.96), rgba(59,63,71,.96));
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+  z-index:80;
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:all .25s ease;
+}
+.scroll-top.is-visible{opacity:1; transform:translateY(0); pointer-events:auto}
+
 /* Subtle background orbs */
 .bg-orb{
   position:fixed;
@@ -61,7 +122,7 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   position:sticky; top:0;
   z-index:50;
   backdrop-filter: blur(14px);
-  background: rgba(10,11,14,.92);
+  background: color-mix(in oklab, var(--panel) 30%, #000 70%);
   border-bottom: 1px solid rgba(255,255,255,.12);
 }
 .topbar--scrolled{box-shadow: 0 12px 34px rgba(0,0,0,.4)}
@@ -179,6 +240,12 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   border-color: rgba(255,255,255,.22);
 }
 .btn--ghost:hover{transform: translateY(-1px); background: rgba(255,255,255,.2)}
+.btn--ghost-light{
+  background: rgba(15,17,21,.06);
+  color:rgba(15,17,21,.9);
+  border-color: rgba(15,17,21,.24);
+}
+.btn--ghost-light:hover{background: rgba(15,17,21,.1)}
 .arrow{opacity:.85}
 
 /* Hero */
@@ -273,7 +340,7 @@ h1{
 .media-card img,
 .media-card video{
   width:100%;
-  height: 420px;
+  height: 360px;
   object-fit: cover;
   transform: scale(1.02);
   transition: transform .6s ease;
@@ -438,6 +505,8 @@ h2{
   gap:12px;
   align-content:start;
 }
+.capacity__grid[data-industries-slider] .mini{display:none}
+.capacity__grid[data-industries-slider] .mini.is-visible{display:block; animation:fadeSlide .45s ease}
 .mini{
   padding:14px 14px 12px;
   border-radius: 22px;
@@ -563,6 +632,8 @@ h2{
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:14px;
 }
+.quotes[data-testimonials-slider] .quote{display:none}
+.quotes[data-testimonials-slider] .quote.is-visible{display:block; animation:fadeSlide .45s ease}
 .quote{
   width:100%;
   padding:22px 20px;
@@ -711,6 +782,8 @@ input:focus, textarea:focus{
 .delay-2{transition-delay:.16s}
 .delay-3{transition-delay:.24s}
 .delay-4{transition-delay:.32s}
+.section-fade{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease}
+.section-fade.in{opacity:1; transform:translateY(0)}
 
 /* Responsive */
 @media (max-width: 980px){
@@ -742,4 +815,8 @@ input:focus, textarea:focus{
 .media-card video{transition:none}
   .media-card{animation:none}
   .section::before{display:none}
+  .section-fade{transition:none; opacity:1; transform:none}
 }
+
+body[data-theme="dark"] .btn--ghost-light{background:rgba(255,255,255,.08); color:#f4f7fa; border-color:rgba(255,255,255,.26)}
+body[data-theme="dark"] .theme-toggle{border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.08)}
