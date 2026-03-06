@@ -512,10 +512,55 @@
     </footer>
   </main>
 
-  <button class="floating-cta" id="floatingCta" aria-label="Cotizar ahora" onclick="location.href='#contacto'">
-    <span class="floating-cta__icon" aria-hidden="true">💬</span>
+  <button class="floating-cta" id="floatingCta" aria-label="Cotizar ahora" type="button">
+    <span class="floating-cta__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 5.5C4 4.67157 4.67157 4 5.5 4H18.5C19.3284 4 20 4.67157 20 5.5V14.5C20 15.3284 19.3284 16 18.5 16H10.4L6.5 19.25V16H5.5C4.67157 16 4 15.3284 4 14.5V5.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M8 8.5H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M8 11.5H13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+    </span>
     Cotizar ahora
   </button>
+
+  <div class="modal" id="quoteModal" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+      <button class="modal__close" type="button" data-modal-close aria-label="Cerrar formulario">×</button>
+      <div class="modal__head">
+        <p class="eyebrow">COTIZACIÓN EXPRESS</p>
+        <h3 id="quoteModalTitle">Cuéntanos sobre tu proyecto</h3>
+        <p class="muted">Te contactamos con una propuesta inicial en horario laboral.</p>
+      </div>
+      <form class="form form--modal" id="leadModalForm">
+        <label>
+          <span>Nombre</span>
+          <input name="name" required placeholder="Tu nombre" />
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" required placeholder="correo@empresa.com" />
+        </label>
+
+        <label>
+          <span>Teléfono</span>
+          <input name="phone" required placeholder="+52 ..." />
+        </label>
+
+        <label>
+          <span>Sobre el Proyecto</span>
+          <textarea name="message" rows="4" placeholder="Ciudad, tipo de proyecto, número de unidades, tiempos estimados, acabados deseados..."></textarea>
+        </label>
+
+        <button class="btn btn--primary btn--lg" type="submit">Enviar <span class="arrow">→</span></button>
+
+        <div class="success" id="modalSuccess" hidden>
+          <strong>¡Gracias!</strong> Recibimos tu información. Te contactaremos en breve.
+        </div>
+      </form>
+    </div>
+  </div>
   <button class="scroll-top" id="scrollTop" aria-label="Subir arriba">↑</button>
 
   <script src="./script.js"></script>
