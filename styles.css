@@ -672,7 +672,6 @@ h2{
   display:flex;
   gap:14px;
   width:max-content;
-  will-change:transform;
 }
 .testimonials-marquee.is-animated .testimonials-track{
   animation:testimonialsLoop 38s linear infinite;
