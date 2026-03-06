@@ -159,6 +159,7 @@
   const slider = document.querySelector('[data-gallery-slider]');
   if (slider) {
     const slides = Array.from(slider.querySelectorAll('.gallery-slide'));
+    const dotsWrap = slider.querySelector('[data-gallery-dots]');
     const prev = slider.querySelector('[data-gallery-prev]');
     const next = slider.querySelector('[data-gallery-next]');
     let idx = 0;
@@ -167,7 +168,27 @@
     const render = (nextIndex) => {
       idx = (nextIndex + slides.length) % slides.length;
       slides.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === idx);
+          dot.setAttribute('aria-current', i === idx ? 'true' : 'false');
+        });
+      }
     };
+
+    if (dotsWrap) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'gallery-dot';
+        dot.setAttribute('aria-label', `Ir a imagen ${i + 1}`);
+        dot.addEventListener('click', () => {
+          render(i);
+          resetAuto();
+        });
+        dotsWrap.appendChild(dot);
+      });
+    }
 
     const resetAuto = () => {
       window.clearInterval(timer);
@@ -176,51 +197,13 @@
 
     prev?.addEventListener('click', () => { render(idx - 1); resetAuto(); });
     next?.addEventListener('click', () => { render(idx + 1); resetAuto(); });
+
     slider.addEventListener('pointerenter', () => window.clearInterval(timer));
     slider.addEventListener('pointerleave', resetAuto);
 
     render(0);
     resetAuto();
   }
-
-  const rotateVisibleCards = (selector, itemSelector, visibleCount = 3, delay = 4200) => {
-    const wrap = document.querySelector(selector);
-    if (!wrap) return;
-    const items = Array.from(wrap.querySelectorAll(itemSelector));
-    if (!items.length) return;
-    let start = 0;
-
-    const render = () => {
-      items.forEach(el => el.classList.remove('is-visible'));
-      for (let i = 0; i < Math.min(visibleCount, items.length); i++) {
-        items[(start + i) % items.length].classList.add('is-visible');
-      }
-    };
-
-    render();
-    window.setInterval(() => {
-      start = (start + 1) % items.length;
-      render();
-    }, delay);
-  };
-
-  rotateVisibleCards('[data-testimonials-slider]', '.quote', window.innerWidth < 980 ? 1 : 3, 5000);
-  rotateVisibleCards('[data-industries-slider]', '.mini', window.innerWidth < 980 ? 1 : 3, 4600);
-
-  // Fade-in for all sections
-  const sectionEls = Array.from(document.querySelectorAll('main > section'));
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        sectionObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  sectionEls.forEach((sec) => {
-    sec.classList.add('section-fade');
-    sectionObserver.observe(sec);
-  });
 
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
