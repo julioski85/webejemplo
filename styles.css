@@ -32,6 +32,8 @@ body{
   animation: pageIn .45s ease both;
 }
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
+@keyframes bgDrift{from{background-position:0 0, 0 0, 0 0}to{background-position:18px -8px, -18px 12px, 0 0}}
+body{animation: pageIn .45s ease both, bgDrift 14s ease-in-out infinite alternate}
 
 .container{width:min(1120px, calc(100% - 40px)); margin:0 auto}
 a{color:inherit; text-decoration:none}
@@ -50,16 +52,25 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 }
 .orb-1{left:-140px; top:120px; background:rgba(15,17,21,.22)}
 .orb-2{right:-180px; top:280px; background:rgba(15,17,21,.18)}
+.orb-1,.orb-2{animation: orbFloat 8s ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* Topbar */
 .topbar{
   position:sticky; top:0;
   z-index:50;
   backdrop-filter: blur(14px);
-  background: linear-gradient(to bottom, rgba(246,246,248,.92), rgba(246,246,248,.70));
-  border-bottom: 1px solid var(--line);
+  background: rgba(10,11,14,.92);
+  border-bottom: 1px solid rgba(255,255,255,.12);
 }
-.topbar--scrolled{box-shadow: 0 12px 34px rgba(15,17,21,.10)}
+.topbar--scrolled{box-shadow: 0 12px 34px rgba(0,0,0,.4)}
+.topbar::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+}
 .topbar__inner{
   display:flex; align-items:center; justify-content:space-between;
   gap:16px;
@@ -71,14 +82,14 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 .nav{
   display:flex; gap:18px;
   padding:10px 14px;
-  border:1px solid var(--line);
+  border:1px solid rgba(255,255,255,.18);
   border-radius:999px;
-  background: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.04);
 }
 .nav a{
   font-size:13px;
-  color:rgba(15,17,21,.86);
-  opacity:.92;
+  color:rgba(255,255,255,.9);
+  opacity:.9;
 }
 .nav a:hover{opacity:1}
 
@@ -89,8 +100,8 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   display:none;
   width:44px; height:44px;
   border-radius:16px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.75);
+  border:1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.08);
   cursor:pointer;
   transition: transform .15s ease;
 }
@@ -99,7 +110,7 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   display:block;
   height:2px;
   width:18px;
-  background:rgba(15,17,21,.85);
+  background:rgba(255,255,255,.9);
   margin:5px auto;
   border-radius:999px;
   transition: transform .2s ease, opacity .2s ease;
@@ -116,17 +127,17 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   gap:8px;
   border:1px solid var(--line);
   border-radius:22px;
-  background: rgba(255,255,255,.92);
+  background: rgba(12,14,18,.96);
   box-shadow: var(--shadow2);
 }
 .mobile[hidden]{display:none}
 .mobile a{
   padding:12px 12px;
   border-radius:16px;
-  color: rgba(15,17,21,.88);
+  color: rgba(255,255,255,.92);
   font-weight:600;
 }
-.mobile a:hover{background: rgba(15,17,21,.05)}
+.mobile a:hover{background: rgba(255,255,255,.08)}
 
 /* Buttons */
 .btn{
@@ -162,10 +173,11 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 @keyframes shimmer{from{transform: translateX(-60%) rotate(12deg)} to{transform: translateX(60%) rotate(12deg)}}
 
 .btn--ghost{
-  background: rgba(255,255,255,.80);
-  color:rgba(15,17,21,.90);
+  background: rgba(255,255,255,.12);
+  color:rgba(255,255,255,.92);
+  border-color: rgba(255,255,255,.22);
 }
-.btn--ghost:hover{transform: translateY(-1px); background: rgba(255,255,255,.95)}
+.btn--ghost:hover{transform: translateY(-1px); background: rgba(255,255,255,.2)}
 .arrow{opacity:.85}
 
 /* Hero */
@@ -189,11 +201,14 @@ h1{
   letter-spacing:-.02em;
 }
 .grad{
-  background: linear-gradient(135deg, rgba(15,17,21,.98), rgba(59,63,71,.92));
+  background: linear-gradient(120deg, rgba(15,17,21,.98), rgba(59,63,71,.88), rgba(15,17,21,.98));
+  background-size: 220% 220%;
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
+  animation: titleShine 6s ease-in-out infinite;
 }
+@keyframes titleShine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .lead{
   margin:0 0 18px;
   font-size:16px;
@@ -211,7 +226,9 @@ h1{
   border:1px solid var(--line);
   background: rgba(255,255,255,.78);
   border-radius: var(--radius);
+  transition: transform .2s ease, background .2s ease;
 }
+.trust__item:hover{transform: translateX(4px); background: rgba(255,255,255,.95)}
 .trust__item strong{display:block; font-size:13px}
 .trust__item small{display:block; color:var(--muted); margin-top:2px; font-size:12px}
 .dot{
@@ -314,6 +331,9 @@ h1{
 }
 
 .section--soft{background: var(--soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.section--benefits{
+  background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.92));
+}
 .section__head{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
@@ -329,13 +349,6 @@ h2{
 }
 .muted{margin:0; color:var(--muted); line-height:1.65}
 
-.split{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:26px;
-  align-items:start;
-}
-.split p{color:rgba(15,17,21,.74); line-height:1.75; margin:0 0 10px}
 
 .intro-visual{
   margin-top:24px;
@@ -373,6 +386,10 @@ h2{
   display:grid;
   grid-template-columns: 1.1fr 1fr 1fr;
   gap:16px;
+  padding:8px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(255,255,255,.85), rgba(255,255,255,.55));
+  border:1px solid var(--line);
 }
 .card{
   padding:22px 20px;
@@ -382,8 +399,20 @@ h2{
   box-shadow: var(--shadow2);
   transition: transform .18s ease, border-color .18s ease, background .18s ease;
   will-change: transform;
+  position:relative;
+  overflow:hidden;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  inset:-40% -80%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: translateX(-80%) rotate(14deg);
+  opacity:0;
 }
 .card:hover{transform: translateY(-4px); border-color: rgba(15,17,21,.18); background: rgba(255,255,255,.92)}
+.card:hover::after{opacity:1; animation: cardSweep .9s ease}
+@keyframes cardSweep{from{transform: translateX(-80%) rotate(14deg)}to{transform: translateX(80%) rotate(14deg)}}
 .card__icon{
   width:50px; height:50px;
   border-radius: 18px;
@@ -418,7 +447,7 @@ h2{
 }
 .capacity__grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap:12px;
   align-content:start;
 }
@@ -431,7 +460,13 @@ h2{
   will-change: transform;
 }
 .mini:hover{transform: translateY(-4px)}
-.mini h4{margin:0 0 6px; font-size:14px}
+.mini h4{margin:0 0 6px; font-size:14px; display:flex; align-items:center; gap:8px}
+.mini h4::before{
+  content:"";
+  width:8px; height:8px;
+  border-radius:999px;
+  background: linear-gradient(135deg, rgba(15,17,21,.98), rgba(59,63,71,.92));
+}
 .mini p{margin:0; color:rgba(15,17,21,.70); font-size:13px; line-height:1.55}
 
 /* Gallery */
@@ -449,7 +484,9 @@ h2{
   box-shadow: var(--shadow2);
   position:relative;
   will-change: transform;
+  transition: transform .22s ease, box-shadow .22s ease;
 }
+.shot:hover{transform: translateY(-4px); box-shadow: 0 20px 40px rgba(15,17,21,.1)}
 .shot img{
   width:100%;
   height: 290px;
@@ -501,26 +538,34 @@ h2{
   display:grid;
   grid-template-columns: 1.1fr 1fr 1fr;
   gap:14px;
+  width:max-content;
+  animation: slideQuotes 28s linear infinite;
+}
+.quotes-track:hover{animation-play-state: paused}
+@keyframes slideQuotes{
+  0%{transform: translateX(0)}
+  100%{transform: translateX(var(--slide-distance, -45%))}
 }
 .quote{
+  width:min(360px, 80vw);
   padding:22px 20px;
   border-radius: var(--radius-lg);
   border:1px solid var(--line);
-  background: rgba(255,255,255,.80);
+  background: rgba(255,255,255,.9);
   box-shadow: var(--shadow2);
-  transition: transform .18s ease;
-  will-change: transform;
+  transition: transform .2s ease;
 }
-.quote:hover{transform: translateY(-4px)}
+.quote:hover{transform: translateY(-3px)}
 .quote p{margin:0 0 14px; color:rgba(15,17,21,.72); line-height:1.7}
 .quote__who{display:flex; gap:10px; align-items:center}
 .avatar{
-  width:34px; height:34px;
+  min-width:40px; height:40px;
   border-radius: 14px;
   display:grid; place-items:center;
   font-weight:800;
   color:#ffffff;
   background: linear-gradient(135deg, rgba(15,17,21,.96), rgba(59,63,71,.96));
+  box-shadow: 0 0 0 4px rgba(15,17,21,.06);
 }
 .quote__who small{color:var(--muted); display:block; margin-top:2px; font-size:12px}
 
@@ -680,15 +725,14 @@ input:focus, textarea:focus{
 @media (max-width: 980px){
   .hero__grid{grid-template-columns:1fr; gap:18px}
   .section__head{grid-template-columns:1fr}
-  .split{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr}
   .capacity{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr}
   .video-showcase{grid-template-columns:1fr}
   .intro-visual img{height:260px}
   .shot img{height:280px}
-  .shot--tall img{height:320px}
-  .quotes{grid-template-columns:1fr}
+  .quotes-track{animation-duration:36s}
+  .capacity__grid{grid-template-columns:1fr}
   .contact{grid-template-columns:1fr}
 
   .nav, .topbar__cta{display:none}
