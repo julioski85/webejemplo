@@ -239,6 +239,23 @@ h1{
   box-shadow: 0 0 0 7px rgba(15,17,21,.04);
 }
 
+.hero-kpis{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:10px;
+}
+.hero-kpi{
+  border:1px solid var(--line);
+  border-radius:20px;
+  background: rgba(255,255,255,.78);
+  padding:10px 12px;
+  display:grid;
+  gap:2px;
+}
+.hero-kpi strong{font-size:13px; letter-spacing:.01em}
+.hero-kpi span{font-size:11px; color:var(--muted); line-height:1.35}
+
 /* Hero media */
 .hero__media{position:relative}
 .media-card{
@@ -741,6 +758,7 @@ input:focus, textarea:focus{
   /* show dropdown only on mobile and only when not hidden */
   .mobile:not([hidden]){display:grid}
   .stat-card{right:10px; top:10px}
+  .hero-kpis{grid-template-columns:1fr}
 }
 
 @media (prefers-reduced-motion: reduce){
