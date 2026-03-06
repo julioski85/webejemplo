@@ -205,6 +205,79 @@
     resetAuto();
   }
 
+
+  // Industries manual slider (no autoplay)
+  const industriesSlider = document.querySelector('[data-industries-slider]');
+  if (industriesSlider) {
+    const track = industriesSlider.querySelector('[data-industries-track]');
+    const prevBtn = industriesSlider.querySelector('[data-industry-prev]');
+    const nextBtn = industriesSlider.querySelector('[data-industry-next]');
+    const slideBy = () => Math.max(260, Math.round((track?.clientWidth || 320) * 0.62));
+
+    prevBtn?.addEventListener('click', () => {
+      track?.scrollBy({ left: -slideBy(), behavior: 'smooth' });
+    });
+    nextBtn?.addEventListener('click', () => {
+      track?.scrollBy({ left: slideBy(), behavior: 'smooth' });
+    });
+  }
+
+  // Testimonials carousel (3 cards + auto scroll)
+  const testimonials = document.querySelector('[data-testimonials-slider]');
+  if (testimonials) {
+    const cards = Array.from(testimonials.querySelectorAll('.quote'));
+    let start = 0;
+    let timer;
+
+    const visibleCount = () => (window.innerWidth <= 980 ? 1 : 3);
+
+    const render = () => {
+      const count = visibleCount();
+      cards.forEach((card, i) => {
+        const visible = ((i - start + cards.length) % cards.length) < count;
+        card.classList.toggle('is-visible', visible);
+      });
+    };
+
+    const next = () => {
+      start = (start + 1) % cards.length;
+      render();
+    };
+
+    const resetAuto = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(next, 4200);
+    };
+
+    window.addEventListener('resize', render);
+    testimonials.addEventListener('pointerenter', () => window.clearInterval(timer));
+    testimonials.addEventListener('pointerleave', resetAuto);
+
+    render();
+    resetAuto();
+  }
+
+
+  // Scroll-driven section animations/parallax
+  const sections = Array.from(document.querySelectorAll('.section'));
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('is-in-view');
+    });
+  }, { threshold: 0.2 });
+  sections.forEach((section) => sectionObserver.observe(section));
+
+  const vectorSections = Array.from(document.querySelectorAll('.section--vector'));
+  const onPageScroll = () => {
+    vectorSections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const ratio = Math.min(1, Math.max(-1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+      section.style.setProperty('--vector-shift', `${(ratio * 16).toFixed(2)}px`);
+    });
+  };
+  window.addEventListener('scroll', onPageScroll, { passive: true });
+  onPageScroll();
+
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
   const success = document.getElementById('success');
