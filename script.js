@@ -111,32 +111,6 @@
   };
   window.addEventListener('pointermove', onMove, { passive: true });
 
-
-
-  // Testimonial slider: duplicate items for seamless marquee
-  const track = document.querySelector('.quotes-track');
-  if (track) {
-    const cards = Array.from(track.children);
-    cards.forEach((el) => track.appendChild(el.cloneNode(true)));
-    const totalWidth = Array.from(track.children).slice(0, cards.length)
-      .reduce((acc, el) => acc + el.getBoundingClientRect().width + 14, 0);
-    track.style.setProperty('--slide-distance', `-${Math.max(520, Math.round(totalWidth))}px`);
-  }
-
-  // Soft lift interaction on cards
-  const hoverCards = document.querySelectorAll('.card, .mini, .quote');
-  hoverCards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width - 0.5) * 6;
-      const y = ((e.clientY - r.top) / r.height - 0.5) * -6;
-      card.style.transform = `translateY(-4px) rotateX(${y}deg) rotateY(${x}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
   const success = document.getElementById('success');
