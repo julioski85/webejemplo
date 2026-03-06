@@ -263,14 +263,63 @@
     }
   }
 
-  // Form (frontend success message only)
-  const form = document.getElementById('leadForm');
-  const success = document.getElementById('success');
-  if (form) {
+  // Floating CTA modal
+  const floatingCta = document.getElementById('floatingCta');
+  const quoteModal = document.getElementById('quoteModal');
+  const modalDialog = quoteModal?.querySelector('.modal__dialog');
+
+  const openModal = () => {
+    if (!quoteModal) return;
+    quoteModal.classList.add('is-open');
+    quoteModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    window.setTimeout(() => {
+      quoteModal.querySelector('input,textarea,button')?.focus();
+    }, 60);
+  };
+
+  const closeModal = () => {
+    if (!quoteModal) return;
+    quoteModal.classList.remove('is-open');
+    quoteModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  floatingCta?.addEventListener('click', openModal);
+  quoteModal?.querySelectorAll('[data-modal-close]').forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  quoteModal?.addEventListener('click', (e) => {
+    if (modalDialog && !modalDialog.contains(e.target)) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Forms (frontend success message only)
+  const bindFormSuccess = (formId, successId) => {
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    if (!form) return;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (success) success.hidden = false;
-      form.querySelectorAll('input,textarea,button').forEach(el => el.disabled = true);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviado ✓';
+      }
+      form.querySelectorAll('input,textarea').forEach((el) => {
+        el.disabled = true;
+      });
+      if (formId === 'leadModalForm') {
+        window.setTimeout(closeModal, 1300);
+      }
     });
-  }
+  };
+
+  bindFormSuccess('leadForm', 'success');
+  bindFormSuccess('leadModalForm', 'modalSuccess');
 })();
