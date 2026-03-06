@@ -206,20 +206,16 @@
   }
 
 
-  // Industries manual slider (no autoplay)
-  const industriesSlider = document.querySelector('[data-industries-slider]');
-  if (industriesSlider) {
-    const track = industriesSlider.querySelector('[data-industries-track]');
-    const prevBtn = industriesSlider.querySelector('[data-industry-prev]');
-    const nextBtn = industriesSlider.querySelector('[data-industry-next]');
-    const slideBy = () => Math.max(260, Math.round((track?.clientWidth || 320) * 0.62));
-
-    prevBtn?.addEventListener('click', () => {
-      track?.scrollBy({ left: -slideBy(), behavior: 'smooth' });
-    });
-    nextBtn?.addEventListener('click', () => {
-      track?.scrollBy({ left: slideBy(), behavior: 'smooth' });
-    });
+  // Industries auto horizontal slider
+  const industries = document.querySelector('[data-industries-slider]');
+  if (industries) {
+    const cards = Array.from(industries.querySelectorAll('.mini'));
+    if (cards.length) {
+      cards.forEach((card) => industries.appendChild(card.cloneNode(true)));
+      industries.classList.add('is-animated');
+      industries.addEventListener('pointerenter', () => { industries.style.animationPlayState = 'paused'; });
+      industries.addEventListener('pointerleave', () => { industries.style.animationPlayState = 'running'; });
+    }
   }
 
   // Testimonials carousel (3 cards + auto scroll)
@@ -256,27 +252,6 @@
     render();
     resetAuto();
   }
-
-
-  // Scroll-driven section animations/parallax
-  const sections = Array.from(document.querySelectorAll('.section'));
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('is-in-view');
-    });
-  }, { threshold: 0.2 });
-  sections.forEach((section) => sectionObserver.observe(section));
-
-  const vectorSections = Array.from(document.querySelectorAll('.section--vector'));
-  const onPageScroll = () => {
-    vectorSections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const ratio = Math.min(1, Math.max(-1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-      section.style.setProperty('--vector-shift', `${(ratio * 16).toFixed(2)}px`);
-    });
-  };
-  window.addEventListener('scroll', onPageScroll, { passive: true });
-  onPageScroll();
 
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');

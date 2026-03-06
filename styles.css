@@ -823,99 +823,38 @@ input:focus, textarea:focus{
 }
 
 
-/* Vector decorations and interactive section feel */
-.section--vector{position:relative; overflow:hidden}
-.section--vector::after{
-  content:"";
-  position:absolute;
-  width:320px;
-  height:320px;
-  right:-120px;
-  top:-70px;
-  background:
-    radial-gradient(circle at center, rgba(15,17,21,.10) 0 2px, transparent 3px) 0 0/22px 22px,
-    linear-gradient(135deg, rgba(15,17,21,.06), transparent);
-  border-radius:50%;
-  opacity:.5;
-  transform: translateY(var(--vector-shift, 0px));
-  pointer-events:none;
-}
-.section--vector::before{
-  content:"";
-  position:absolute;
-  left:-120px;
-  bottom:-120px;
-  width:280px;
-  height:280px;
-  border:1px solid rgba(15,17,21,.14);
-  border-radius:50%;
-  opacity:.45;
-  transform: translateY(calc(var(--vector-shift, 0px) * -0.6));
-  pointer-events:none;
-}
-.section.is-in-view{animation: sectionLift .7s ease both}
-@keyframes sectionLift{from{transform:translateY(10px); opacity:.92}to{transform:translateY(0); opacity:1}}
 
-/* Capacity manual slider */
-.capacity-slider{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center}
-.industry-nav{
-  width:42px;
-  height:42px;
-  border-radius:999px;
-  border:1px solid var(--line2);
-  background:rgba(255,255,255,.9);
-  font-size:19px;
-  cursor:pointer;
-  transition:transform .15s ease, background .2s ease;
-}
-.industry-nav:hover{transform:translateY(-2px); background:#fff}
+/* Industries horizontal auto-scroll */
 .industries-grid{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:minmax(240px, 48%);
+  display:flex;
   gap:12px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:thin;
-  scroll-behavior:smooth;
-  padding-bottom:6px;
+  overflow:hidden;
+  position:relative;
 }
-.industries-grid .mini{scroll-snap-align:start; min-height:130px}
-
-/* FAQ typography consistency */
-.acc-item,
-.acc-panel p{
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size:16px;
-  line-height:1.55;
+.industries-grid::before,
+.industries-grid::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:28px;
+  z-index:2;
+  pointer-events:none;
 }
-.acc-item{font-weight:600}
-.acc-panel p{font-weight:500}
-
-/* Floating CTA */
-.floating-cta{
-  position:fixed;
-  right:20px;
-  bottom:78px;
-  z-index:95;
-  border:0;
-  border-radius:999px;
-  padding:13px 18px;
-  font-weight:700;
-  color:#fff;
-  background:linear-gradient(135deg,#0f1115,#3b3f47);
-  box-shadow:0 14px 34px rgba(0,0,0,.28);
-  cursor:pointer;
+.industries-grid::before{left:0; background:linear-gradient(90deg, var(--panel), transparent)}
+.industries-grid::after{right:0; background:linear-gradient(270deg, var(--panel), transparent)}
+.industries-grid .mini{
+  display:block !important;
+  min-width:calc(50% - 6px);
+  flex:0 0 calc(50% - 6px);
 }
-.floating-cta:hover{transform:translateY(-2px)}
+.industries-grid.is-animated{animation:industryScroll 24s linear infinite}
+@keyframes industryScroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
 
 /* Better dark mode readability */
-body[data-theme="dark"] .section--vector::after{
-  background:
-    radial-gradient(circle at center, rgba(255,255,255,.16) 0 2px, transparent 3px) 0 0/22px 22px,
-    linear-gradient(135deg, rgba(255,255,255,.06), transparent);
-}
-body[data-theme="dark"] .section--vector::before{border-color:rgba(255,255,255,.20)}
 body[data-theme="dark"] .eyebrow,
 body[data-theme="dark"] .lead,
 body[data-theme="dark"] .card p,
@@ -930,8 +869,6 @@ body[data-theme="dark"] .footer__right,
 body[data-theme="dark"] .media-card__badge,
 body[data-theme="dark"] .shot figcaption{color:#e7edf5}
 
-body[data-theme="dark"] .section--benefits{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
-body[data-theme="dark"] .cards{background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border-color:rgba(255,255,255,.16)}
 body[data-theme="dark"] .trust__item,
 body[data-theme="dark"] .hero-kpi,
 body[data-theme="dark"] .card,
@@ -947,7 +884,7 @@ body[data-theme="dark"] .form,
 body[data-theme="dark"] .footer,
 body[data-theme="dark"] .media-card,
 body[data-theme="dark"] .stat-card,
-body[data-theme="dark"] .shot{background:rgba(255,255,255,.06)}
+body[data-theme="dark"] .shot{background:rgba(255,255,255,.04)}
 
 body[data-theme="dark"] input,
 body[data-theme="dark"] textarea{background:rgba(255,255,255,.06); color:#f3f7fb; border-color:rgba(255,255,255,.22)}
@@ -956,11 +893,7 @@ body[data-theme="dark"] textarea:focus{background:rgba(255,255,255,.1); border-c
 body[data-theme="dark"] .acc-item{color:#f3f7fb}
 body[data-theme="dark"] .btn--ghost-light{background:rgba(255,255,255,.08); color:#f4f7fa; border-color:rgba(255,255,255,.26)}
 body[data-theme="dark"] .theme-toggle{border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.08)}
-body[data-theme="dark"] .industry-nav{background:rgba(255,255,255,.12); color:#f3f7fb}
 
 @media (max-width: 980px){
-  .capacity-slider{grid-template-columns:1fr}
-  .industry-nav{display:none}
-  .industries-grid{grid-auto-columns:100%}
-  .floating-cta{right:14px; left:14px; bottom:16px; text-align:center}
+  .industries-grid .mini{min-width:100%; flex-basis:100%}
 }
