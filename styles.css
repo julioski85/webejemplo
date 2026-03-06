@@ -558,6 +558,12 @@ h2{
   transition: transform .5s ease;
 }
 .shot:hover img{transform: scale(1.05)}
+
+.shot--horizontal img{
+  object-fit: cover;
+  object-position: center 42%;
+  aspect-ratio: 16/9;
+}
 .gallery-controls{
   margin-top:14px;
   display:flex;
