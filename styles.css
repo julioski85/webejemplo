@@ -771,7 +771,7 @@ input:focus, textarea:focus{
 }
 .footer__inner{display:flex; align-items:center; justify-content:space-between; gap:14px}
 .footer__left{display:flex; gap:12px; align-items:center}
-.footer__left img{height:30px; opacity:.9}
+.footer__left img{height:36px; opacity:.98}
 .footer__right{display:flex; gap:10px; align-items:center; color:rgba(15,17,21,.70)}
 .sep{opacity:.4}
 

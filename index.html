@@ -136,7 +136,7 @@
 
 
     <!-- BENEFICIOS -->
-    <section id="beneficios" class="section section--benefits">
+    <section id="beneficios" class="section section--benefits section--vector">
       <div class="container">
         <div class="section__head">
           <div class="reveal">
@@ -188,7 +188,7 @@
     </section>
 
     <!-- CAPACIDAD -->
-    <section id="capacidad" class="section">
+    <section id="capacidad" class="section section--vector">
       <div class="container">
         <div class="capacity reveal">
           <div class="capacity__copy">
@@ -202,31 +202,35 @@
             <a class="btn btn--primary btn--lg" href="#contacto">Solicitar cotización <span class="arrow">→</span></a>
           </div>
 
-          <div class="capacity__grid industries-grid" data-industries-slider>
-            <div class="mini reveal delay-1">
-              <h4>Constructoras</h4>
-              <p>Integración por etapas y coordinación con obra.</p>
+          <div class="capacity-slider" data-industries-slider>
+            <button class="industry-nav" type="button" data-industry-prev aria-label="Anterior">←</button>
+            <div class="capacity__grid industries-grid" data-industries-track>
+              <div class="mini reveal delay-1">
+                <h4>Constructoras</h4>
+                <p>Integración por etapas y coordinación con obra.</p>
+              </div>
+              <div class="mini reveal delay-2">
+                <h4>Desarrolladoras</h4>
+                <p>Estandarización por torre, modelo y tipología.</p>
+              </div>
+              <div class="mini reveal delay-3">
+                <h4>Hotelería</h4>
+                <p>Acabados resistentes para alto flujo y operación continua.</p>
+              </div>
+              <div class="mini reveal delay-4">
+                <h4>Despachos / Interiorismo</h4>
+                <p>Producción precisa basada en especificaciones y diseño.</p>
+              </div>
+              <div class="mini reveal delay-4">
+                <h4>Distribución / Maquila</h4>
+                <p>Capacidad escalable para surtir volúmenes de forma consistente.</p>
+              </div>
+              <div class="mini reveal delay-3">
+                <h4>Proyectos residenciales verticales</h4>
+                <p>Desde prototipo hasta implementación por fases.</p>
+              </div>
             </div>
-            <div class="mini reveal delay-2">
-              <h4>Desarrolladoras</h4>
-              <p>Estandarización por torre, modelo y tipología.</p>
-            </div>
-            <div class="mini reveal delay-3">
-              <h4>Hotelería</h4>
-              <p>Acabados resistentes para alto flujo y operación continua.</p>
-            </div>
-            <div class="mini reveal delay-4">
-              <h4>Despachos / Interiorismo</h4>
-              <p>Producción precisa basada en especificaciones y diseño.</p>
-            </div>
-            <div class="mini reveal delay-4">
-              <h4>Distribución / Maquila</h4>
-              <p>Capacidad escalable para surtir volúmenes de forma consistente.</p>
-            </div>
-            <div class="mini reveal delay-3">
-              <h4>Proyectos residenciales verticales</h4>
-              <p>Desde prototipo hasta implementación por fases.</p>
-            </div>
+            <button class="industry-nav" type="button" data-industry-next aria-label="Siguiente">→</button>
           </div>
         </div>
       </div>
@@ -284,7 +288,7 @@
     </section>
 
     <!-- TESTIMONIOS -->
-    <section class="section testimonials-section">
+    <section class="section testimonials-section section--vector">
       <div class="container">
         <div class="section__head">
           <div class="reveal">
@@ -499,7 +503,7 @@
     <footer class="footer">
       <div class="container footer__inner">
         <div class="footer__left">
-          <img src="https://abitaliahome.com/wp-content/uploads/2019/10/logo-abitalia.png" alt="Abitalia Home" />
+          <img src="https://abitalia.mkt-wise.com/wp-content/uploads/2026/03/logo-abitalia-3-1.png" alt="Abitalia Home" />
           <p class="muted">Landing B2B · Abitalia / Muteza</p>
         </div>
         <div class="footer__right">
@@ -511,6 +515,7 @@
     </footer>
   </main>
 
+  <button class="floating-cta" id="floatingCta" aria-label="Cotizar ahora" onclick="location.href='#contacto'">Cotizar ahora</button>
   <button class="scroll-top" id="scrollTop" aria-label="Subir arriba">↑</button>
 
   <script src="./script.js"></script>
