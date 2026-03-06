@@ -111,6 +111,57 @@
   };
   window.addEventListener('pointermove', onMove, { passive: true });
 
+
+  // Gallery slider
+  const slider = document.querySelector('[data-gallery-slider]');
+  if (slider) {
+    const slides = Array.from(slider.querySelectorAll('.gallery-slide'));
+    const dotsWrap = slider.querySelector('[data-gallery-dots]');
+    const prev = slider.querySelector('[data-gallery-prev]');
+    const next = slider.querySelector('[data-gallery-next]');
+    let idx = 0;
+    let timer;
+
+    const render = (nextIndex) => {
+      idx = (nextIndex + slides.length) % slides.length;
+      slides.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === idx);
+          dot.setAttribute('aria-current', i === idx ? 'true' : 'false');
+        });
+      }
+    };
+
+    if (dotsWrap) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'gallery-dot';
+        dot.setAttribute('aria-label', `Ir a imagen ${i + 1}`);
+        dot.addEventListener('click', () => {
+          render(i);
+          resetAuto();
+        });
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    const resetAuto = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => render(idx + 1), 5000);
+    };
+
+    prev?.addEventListener('click', () => { render(idx - 1); resetAuto(); });
+    next?.addEventListener('click', () => { render(idx + 1); resetAuto(); });
+
+    slider.addEventListener('pointerenter', () => window.clearInterval(timer));
+    slider.addEventListener('pointerleave', resetAuto);
+
+    render(0);
+    resetAuto();
+  }
+
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
   const success = document.getElementById('success');
