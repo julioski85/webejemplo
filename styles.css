@@ -181,7 +181,7 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 .arrow{opacity:.85}
 
 /* Hero */
-.hero{padding:72px 0 30px}
+.hero{padding:88px 0 44px}
 .hero__grid{
   display:grid;
   grid-template-columns: 1.12fr .88fr;
@@ -337,7 +337,7 @@ h1{
 }
 
 /* Sections */
-.section{padding:70px 0; position:relative}
+.section{padding:84px 0; position:relative}
 .section::before{
   content:"";
   position:absolute;
@@ -365,38 +365,6 @@ h2{
   letter-spacing:-.02em;
 }
 .muted{margin:0; color:var(--muted); line-height:1.65}
-
-
-.intro-visual{
-  margin-top:24px;
-  border:1px solid var(--line);
-  border-radius: var(--radius-lg);
-  overflow:hidden;
-  background: rgba(255,255,255,.84);
-  box-shadow: var(--shadow2);
-  position:relative;
-}
-.intro-visual img{
-  width:100%;
-  height:340px;
-  object-fit:cover;
-  display:block;
-}
-.intro-visual__copy{
-  position:absolute;
-  left:16px;
-  bottom:16px;
-  display:grid;
-  gap:5px;
-  max-width:min(680px,92%);
-  background: rgba(255,255,255,.82);
-  border:1px solid var(--line2);
-  border-radius:20px;
-  padding:12px 14px;
-  backdrop-filter: blur(8px);
-}
-.intro-visual__copy strong{font-size:14px}
-.intro-visual__copy span{font-size:12px; color:var(--muted)}
 
 /* Cards */
 .cards{
@@ -553,18 +521,11 @@ h2{
 /* Quotes */
 .quotes{
   display:grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:14px;
-  width:max-content;
-  animation: slideQuotes 28s linear infinite;
-}
-.quotes-track:hover{animation-play-state: paused}
-@keyframes slideQuotes{
-  0%{transform: translateX(0)}
-  100%{transform: translateX(var(--slide-distance, -45%))}
 }
 .quote{
-  width:min(360px, 80vw);
+  width:100%;
   padding:22px 20px;
   border-radius: var(--radius-lg);
   border:1px solid var(--line);
@@ -585,33 +546,6 @@ h2{
   box-shadow: 0 0 0 4px rgba(15,17,21,.06);
 }
 .quote__who small{color:var(--muted); display:block; margin-top:2px; font-size:12px}
-
-
-.quote-photo{
-  margin:0;
-  border-radius: var(--radius-lg);
-  overflow:hidden;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.82);
-  box-shadow: var(--shadow2);
-  position:relative;
-}
-.quote-photo img{
-  width:100%;
-  height:100%;
-  min-height:300px;
-  object-fit:cover;
-}
-.quote-photo figcaption{
-  position:absolute;
-  left:14px;
-  bottom:14px;
-  font-size:12px;
-  padding:9px 11px;
-  border-radius:999px;
-  border:1px solid var(--line2);
-  background: rgba(255,255,255,.82);
-}
 
 /* Accordion */
 .accordion{
@@ -746,9 +680,8 @@ input:focus, textarea:focus{
   .capacity{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr}
   .video-showcase{grid-template-columns:1fr}
-  .intro-visual img{height:260px}
   .shot img{height:280px}
-  .quotes-track{animation-duration:36s}
+  .quotes{grid-template-columns:1fr}
   .capacity__grid{grid-template-columns:1fr}
   .contact{grid-template-columns:1fr}
 
