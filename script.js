@@ -84,6 +84,33 @@
     });
   }
 
+
+
+  // Ensure autoplay videos keep playing on mobile browsers
+  const videos = Array.from(document.querySelectorAll('video[autoplay]'));
+  const safePlay = (video) => {
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+  };
+  videos.forEach((video) => {
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    safePlay(video);
+    video.addEventListener('canplay', () => safePlay(video), { once: true });
+  });
+
+  // Subtle background movement for a more dynamic feel
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  const onMove = (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    if (orb1) orb1.style.transform = `translate(${x}px, ${y}px)`;
+    if (orb2) orb2.style.transform = `translate(${-x}px, ${-y}px)`;
+  };
+  window.addEventListener('pointermove', onMove, { passive: true });
+
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
   const success = document.getElementById('success');
