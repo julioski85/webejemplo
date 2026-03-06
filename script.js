@@ -205,6 +205,54 @@
     resetAuto();
   }
 
+
+  // Industries auto horizontal slider
+  const industries = document.querySelector('[data-industries-slider]');
+  if (industries) {
+    const cards = Array.from(industries.querySelectorAll('.mini'));
+    if (cards.length) {
+      cards.forEach((card) => industries.appendChild(card.cloneNode(true)));
+      industries.classList.add('is-animated');
+      industries.addEventListener('pointerenter', () => { industries.style.animationPlayState = 'paused'; });
+      industries.addEventListener('pointerleave', () => { industries.style.animationPlayState = 'running'; });
+    }
+  }
+
+  // Testimonials carousel (3 cards + auto scroll)
+  const testimonials = document.querySelector('[data-testimonials-slider]');
+  if (testimonials) {
+    const cards = Array.from(testimonials.querySelectorAll('.quote'));
+    let start = 0;
+    let timer;
+
+    const visibleCount = () => (window.innerWidth <= 980 ? 1 : 3);
+
+    const render = () => {
+      const count = visibleCount();
+      cards.forEach((card, i) => {
+        const visible = ((i - start + cards.length) % cards.length) < count;
+        card.classList.toggle('is-visible', visible);
+      });
+    };
+
+    const next = () => {
+      start = (start + 1) % cards.length;
+      render();
+    };
+
+    const resetAuto = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(next, 4200);
+    };
+
+    window.addEventListener('resize', render);
+    testimonials.addEventListener('pointerenter', () => window.clearInterval(timer));
+    testimonials.addEventListener('pointerleave', resetAuto);
+
+    render();
+    resetAuto();
+  }
+
   // Form (frontend success message only)
   const form = document.getElementById('leadForm');
   const success = document.getElementById('success');

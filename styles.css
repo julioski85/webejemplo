@@ -505,8 +505,6 @@ h2{
   gap:12px;
   align-content:start;
 }
-.capacity__grid[data-industries-slider] .mini{display:none}
-.capacity__grid[data-industries-slider] .mini.is-visible{display:block; animation:fadeSlide .45s ease}
 .mini{
   padding:14px 14px 12px;
   border-radius: 22px;
@@ -818,5 +816,78 @@ input:focus, textarea:focus{
   .section-fade{transition:none; opacity:1; transform:none}
 }
 
+
+
+/* Industries horizontal auto-scroll */
+.industries-grid{
+  display:flex;
+  gap:12px;
+  overflow:hidden;
+  position:relative;
+}
+.industries-grid::before,
+.industries-grid::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:28px;
+  z-index:2;
+  pointer-events:none;
+}
+.industries-grid::before{left:0; background:linear-gradient(90deg, var(--panel), transparent)}
+.industries-grid::after{right:0; background:linear-gradient(270deg, var(--panel), transparent)}
+.industries-grid .mini{
+  display:block !important;
+  min-width:calc(50% - 6px);
+  flex:0 0 calc(50% - 6px);
+}
+.industries-grid.is-animated{animation:industryScroll 24s linear infinite}
+@keyframes industryScroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* Better dark mode readability */
+body[data-theme="dark"] .eyebrow,
+body[data-theme="dark"] .lead,
+body[data-theme="dark"] .card p,
+body[data-theme="dark"] .mini p,
+body[data-theme="dark"] .quote p,
+body[data-theme="dark"] .acc-panel p,
+body[data-theme="dark"] .fine,
+body[data-theme="dark"] .note,
+body[data-theme="dark"] label span,
+body[data-theme="dark"] .stat-card__label,
+body[data-theme="dark"] .footer__right,
+body[data-theme="dark"] .media-card__badge,
+body[data-theme="dark"] .shot figcaption{color:#e7edf5}
+
+body[data-theme="dark"] .trust__item,
+body[data-theme="dark"] .hero-kpi,
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .capacity,
+body[data-theme="dark"] .mini,
+body[data-theme="dark"] .gallery-slider,
+body[data-theme="dark"] .quote,
+body[data-theme="dark"] .accordion,
+body[data-theme="dark"] .acc-panel,
+body[data-theme="dark"] .bullet,
+body[data-theme="dark"] .note,
+body[data-theme="dark"] .form,
+body[data-theme="dark"] .footer,
+body[data-theme="dark"] .media-card,
+body[data-theme="dark"] .stat-card,
+body[data-theme="dark"] .shot{background:rgba(255,255,255,.04)}
+
+body[data-theme="dark"] input,
+body[data-theme="dark"] textarea{background:rgba(255,255,255,.06); color:#f3f7fb; border-color:rgba(255,255,255,.22)}
+body[data-theme="dark"] input:focus,
+body[data-theme="dark"] textarea:focus{background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.32)}
+body[data-theme="dark"] .acc-item{color:#f3f7fb}
 body[data-theme="dark"] .btn--ghost-light{background:rgba(255,255,255,.08); color:#f4f7fa; border-color:rgba(255,255,255,.26)}
 body[data-theme="dark"] .theme-toggle{border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.08)}
+
+@media (max-width: 980px){
+  .industries-grid .mini{min-width:100%; flex-basis:100%}
+}
