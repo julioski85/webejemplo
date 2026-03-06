@@ -419,6 +419,30 @@ h1{
 .section--benefits{
   background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.92));
 }
+body[data-theme="dark"] .section--benefits{
+  background: linear-gradient(180deg, rgba(15,20,28,.88), rgba(10,14,20,.98));
+}
+body[data-theme="dark"] .section--benefits .section__head h2,
+body[data-theme="dark"] .section--benefits .card h3{
+  color:#f4f7fb;
+}
+body[data-theme="dark"] .section--benefits .cards{
+  background: linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border-color:rgba(255,255,255,.16);
+}
+body[data-theme="dark"] .section--benefits .card{
+  background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border-color:rgba(255,255,255,.18);
+}
+body[data-theme="dark"] .section--benefits .card p,
+body[data-theme="dark"] .section--benefits .muted,
+body[data-theme="dark"] .section--benefits .eyebrow{
+  color:#d7deea;
+}
+body[data-theme="dark"] .section--benefits .card__icon{
+  background: rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.2);
+}
 .section__head{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
