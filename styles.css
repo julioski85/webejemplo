@@ -493,6 +493,10 @@ body[data-theme="dark"] .section--benefits .card__icon{
   align-items:end;
   margin-bottom:26px;
 }
+.section__head--split{align-items:center; margin-bottom:20px}
+.section__head--mini{grid-template-columns:1fr; margin:18px 0 24px}
+.intro-block{display:grid; gap:14px}
+.intro-block__lead{max-width:58ch}
 h2{
   margin:0;
   font-size: clamp(28px, 3vw, 40px);
@@ -500,6 +504,72 @@ h2{
   letter-spacing:-.02em;
 }
 .muted{margin:0; color:var(--muted); line-height:1.65}
+
+.portrait-media{
+  position:relative;
+  border-radius:38px;
+  overflow:hidden;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.85);
+  box-shadow:var(--shadow2);
+  min-height:460px;
+}
+.portrait-media img{width:100%; height:100%; min-height:460px; object-fit:cover}
+.portrait-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(15,17,21,.22), transparent 45%);
+  pointer-events:none;
+}
+.float-badge{
+  position:absolute;
+  right:18px;
+  top:18px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:999px;
+  padding:9px 12px;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(10px);
+  font-size:12px;
+  font-weight:600;
+  color:rgba(15,17,21,.84);
+  animation:badgePulse 2.8s ease-in-out infinite;
+}
+.float-badge svg{width:15px; height:15px}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(15,17,21,.08)}50%{box-shadow:0 0 0 7px rgba(15,17,21,0)}}
+
+.value-points{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:12px;
+  margin-bottom:20px;
+}
+.value-card{
+  padding:16px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.78);
+  box-shadow:var(--shadow2);
+  transition:transform .22s ease, border-color .22s ease;
+}
+.value-card:hover{transform:translateY(-3px); border-color:var(--line2)}
+.value-card h3{margin:0 0 7px; font-size:16px}
+.value-card p{margin:0; color:rgba(15,17,21,.72); line-height:1.55; font-size:14px}
+.value-card__icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  margin-bottom:10px;
+  background:rgba(15,17,21,.05);
+  border:1px solid var(--line);
+}
+.value-card__icon svg{width:19px; height:19px}
 
 /* Cards */
 .cards{
@@ -596,6 +666,47 @@ h2{
   background: linear-gradient(135deg, rgba(15,17,21,.98), rgba(59,63,71,.92));
 }
 .mini p{margin:0; color:rgba(15,17,21,.70); font-size:13px; line-height:1.55}
+
+.section-split{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:16px;
+  align-items:start;
+}
+.section-split--reverse{grid-template-columns:.95fr 1.05fr}
+.section-split__copy{
+  border:1px solid var(--line);
+  border-radius:32px;
+  background:rgba(255,255,255,.75);
+  padding:20px;
+}
+.section-split__copy h3{margin:0 0 14px; font-size:30px; letter-spacing:-.02em}
+.feature-grid{display:grid; gap:10px}
+.feature-card{
+  padding:14px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.82);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:10px;
+  align-items:start;
+  transition:transform .2s ease;
+}
+.feature-card:hover{transform:translateX(4px)}
+.feature-card__icon{
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:rgba(15,17,21,.05);
+  border:1px solid var(--line);
+}
+.feature-card__icon svg{width:16px; height:16px}
+.feature-card h4{margin:0 0 6px; font-size:14px}
+.feature-card p{margin:0; color:rgba(15,17,21,.72); font-size:13px; line-height:1.5}
 
 /* Gallery */
 .gallery-slider{
@@ -749,6 +860,21 @@ h2{
   overflow:hidden;
   border:1px solid var(--line);
   background: rgba(255,255,255,.80);
+}
+.faq-layout{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:16px;
+  align-items:start;
+}
+.faq-layout .portrait-media{min-height:100%}
+.faq-layout .portrait-media img{min-height:540px}
+.faq-cards{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:12px;
+  margin-top:12px;
 }
 .acc-item{
   width:100%;
@@ -917,6 +1043,7 @@ input:focus, textarea:focus{
   .media-card{animation:none}
   .section::before{display:none}
   .section-fade{transition:none; opacity:1; transform:none}
+  .float-badge{animation:none}
 }
 
 
@@ -1097,6 +1224,15 @@ body[data-theme="dark"] .gallery-dot{background:rgba(255,255,255,.32)}
 body[data-theme="dark"] .gallery-dot.is-active{background:#fff}
 body[data-theme="dark"] .modal__dialog{background:#111720}
 body[data-theme="dark"] .modal__close{background:rgba(255,255,255,.08); color:#f1f6fc}
+body[data-theme="dark"] .value-card,
+body[data-theme="dark"] .section-split__copy,
+body[data-theme="dark"] .feature-card,
+body[data-theme="dark"] .portrait-media,
+body[data-theme="dark"] .faq-layout .accordion{background:rgba(255,255,255,.04)}
+body[data-theme="dark"] .value-card p,
+body[data-theme="dark"] .feature-card p,
+body[data-theme="dark"] .float-badge{color:#e7edf5}
+body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
 
 @media (max-width: 980px){
   .container{width:min(1120px, calc(100% - 28px))}
@@ -1112,9 +1248,22 @@ body[data-theme="dark"] .modal__close{background:rgba(255,255,255,.08); color:#f
   .stat-card{position:relative; right:auto; top:auto; width:100%; margin-top:12px; border-radius:20px}
   .section{padding:66px 0}
   .section__head{gap:12px; margin-bottom:20px}
+  .section__head--split,
+  .section__head--mini{margin-bottom:16px}
   .cards{gap:12px; padding:6px}
   .card{padding:20px 18px}
   .capacity{padding:18px}
+  .section-split,
+  .section-split--reverse,
+  .faq-layout{grid-template-columns:1fr}
+  .section-split__copy h3{font-size:24px}
+  .value-points,
+  .faq-cards{grid-template-columns:1fr}
+  .portrait-media,
+  .portrait-media img{min-height:330px}
+  .faq-layout .portrait-media{order:-1}
+  .faq-layout .portrait-media img{min-height:320px}
+  .float-badge{top:auto; right:12px; bottom:12px}
   .capacity-slider{grid-template-columns:1fr; gap:8px}
   .industry-nav{display:none}
   .mini{min-width:86%; flex-basis:86%}
