@@ -585,7 +585,10 @@ h2{
 }
 .muted{margin:0; color:var(--muted); line-height:1.72; font-size:var(--step-0)}
 
-.portrait-media{border-radius:var(--radius-lg)}
+.portrait-media{
+  margin:0;
+  border-radius:var(--radius-lg);
+}
 .portrait-media::after{
   content:"";
   position:absolute;
@@ -1338,10 +1341,32 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   .hero__actions{gap:10px}
   .hero__actions .btn{width:100%}
   .hero__media{margin-top:8px}
+  .hero__media .media-frame--hero,
+  .section__head--split > .portrait-media,
+  .section-split > .portrait-media{
+    width:100%;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;
+    border-radius:var(--radius-lg);
+    left:auto;
+    right:auto;
+    transform:none;
+  }
   .trust--hero{grid-template-columns:1fr}
   .trust{margin-top:var(--space-2)}
   .media-card img,
   .media-card video{min-height:0}
+  .hero__media .media-frame > img,
+  .hero__media .media-frame > video,
+  .section__head--split > .portrait-media > img,
+  .section-split > .portrait-media > img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+  }
   .media-frame{
     min-height:clamp(240px, 34vh, 340px);
     height:100%;
