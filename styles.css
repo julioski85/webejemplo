@@ -1324,25 +1324,6 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
     padding:10px;
     gap:6px;
   }
-  .media-frame,
-  .media-card,
-  .portrait-media,
-  .video-showcase__media,
-  .shot{
-    width:100%;
-    margin-inline:auto;
-  }
-  .section-split > figure,
-  .section__head--split > figure,
-  .gallery-slide,
-  .video-showcase__media{margin:0}
-  .media-frame > img,
-  .media-frame > video,
-  .media-frame picture > img,
-  .shot img,
-  .video-showcase__media video{
-    object-position:center center;
-  }
   .mobile a,
   .mobile .theme-toggle--mobile,
   .mobile .btn{
@@ -1438,29 +1419,10 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
     justify-content:center;
   }
   .floating-cta{
-    left:auto;
-    right:max(10px, env(safe-area-inset-right));
-    bottom:calc(14px + env(safe-area-inset-bottom));
-    padding:9px 12px;
-    gap:6px;
-    border-radius:18px;
-    font-size:13px;
-    box-shadow:0 10px 24px rgba(15,17,21,.2);
-  }
-  .floating-cta::before{transform:scale(.85)}
-  .floating-cta__icon{
-    width:20px;
-    height:20px;
-    animation:ctaPulseMobile 2.1s ease-in-out infinite;
-  }
-  .floating-cta__icon svg{width:12px;height:12px}
-  @keyframes ctaPulseMobile{
-    0%,100%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,.25)}
-    50%{transform:scale(1.06); box-shadow:0 0 0 6px rgba(255,255,255,0)}
-  }
-  .scroll-top{
-    right:max(10px, env(safe-area-inset-right));
-    bottom:calc(64px + env(safe-area-inset-bottom));
+    left:12px;
+    right:12px;
+    bottom:72px;
+    justify-content:center;
   }
   .section--vector::after,
   .section--soft::after,

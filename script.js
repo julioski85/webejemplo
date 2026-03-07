@@ -66,7 +66,6 @@
 
   if (burger && mobile) {
     const isMobileView = () => window.matchMedia('(max-width: 980px)').matches;
-    const isOpen = () => burger.getAttribute('aria-expanded') === 'true';
 
     const close = () => {
       burger.setAttribute('aria-expanded', 'false');
@@ -79,15 +78,12 @@
     burger.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!isMobileView()) return;
-      if (isOpen()) {
-        close();
-        return;
-      }
-      burger.setAttribute('aria-expanded', 'true');
-      mobile.hidden = false;
-      burger.setAttribute('aria-label', 'Cerrar menú');
-      document.body.classList.add('menu-open');
-      setBurgerX(true);
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+      mobile.hidden = expanded;
+      burger.setAttribute('aria-label', expanded ? 'Abrir menú' : 'Cerrar menú');
+      document.body.classList.toggle('menu-open', !expanded);
+      setBurgerX(!expanded);
     });
 
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
