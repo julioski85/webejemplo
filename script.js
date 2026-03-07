@@ -20,7 +20,7 @@
     const isDark = rootBody.getAttribute('data-theme') === 'dark';
     const icon = isDark ? '☀️' : '🌙';
     if (themeToggle) themeToggle.textContent = icon;
-    if (themeToggleMobile) themeToggleMobile.textContent = `${icon} Cambiar tema`;
+    if (themeToggleMobile) themeToggleMobile.textContent = icon;
   };
   const toggleTheme = () => {
     const next = rootBody.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
