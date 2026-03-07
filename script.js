@@ -65,31 +65,47 @@
   };
 
   if (burger && mobile) {
+    const isMobileView = () => window.matchMedia('(max-width: 980px)').matches;
+    const isOpen = () => burger.getAttribute('aria-expanded') === 'true';
+
     const close = () => {
       burger.setAttribute('aria-expanded', 'false');
       mobile.hidden = true;
+      burger.setAttribute('aria-label', 'Abrir menú');
+      document.body.classList.remove('menu-open');
       setBurgerX(false);
     };
 
     burger.addEventListener('click', (e) => {
       e.stopPropagation();
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!expanded));
-      mobile.hidden = expanded;
-      setBurgerX(!expanded);
+      if (!isMobileView()) return;
+      if (isOpen()) {
+        close();
+        return;
+      }
+      burger.setAttribute('aria-expanded', 'true');
+      mobile.hidden = false;
+      burger.setAttribute('aria-label', 'Cerrar menú');
+      document.body.classList.add('menu-open');
+      setBurgerX(true);
     });
 
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
-    document.addEventListener('click', (e) => {
-      const open = burger.getAttribute('aria-expanded') === 'true';
-      if (!open) return;
+    document.addEventListener('pointerdown', (e) => {
+      if (!isOpen()) return;
       if (!mobile.contains(e.target) && !burger.contains(e.target)) close();
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
     });
+
+    window.addEventListener('resize', () => {
+      if (!isMobileView()) close();
+    });
+
+    close();
   }
 
   // Reveal on scroll
