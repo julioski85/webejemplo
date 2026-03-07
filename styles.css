@@ -222,7 +222,8 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 
 /* Mobile menu dropdown — NEVER visible on desktop */
 .mobile{
-  display:none;
+  display:flex;
+  flex-direction:column;
   position:absolute;
   right:max(14px, env(safe-area-inset-right));
   top:calc(68px + env(safe-area-inset-top));
@@ -233,6 +234,7 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
   border-radius:22px;
   background: rgba(12,14,18,.96);
   box-shadow: var(--shadow2);
+  z-index:70;
 }
 .mobile[hidden]{display:none}
 .mobile a{
@@ -1384,7 +1386,7 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   .contact{gap:12px}
   .form{padding:16px}
   .floating-cta{right:14px; bottom:76px; padding:12px 14px}
-  .scroll-top{right:14px; bottom:18px}
+  .scroll-top{right:14px; bottom:calc(72px + env(safe-area-inset-bottom))}
   .modal{padding:12px}
   .modal__dialog{padding:18px; border-radius:24px}
 }

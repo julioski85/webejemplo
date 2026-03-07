@@ -88,9 +88,8 @@
 
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
-    document.addEventListener('click', (e) => {
-      const open = burger.getAttribute('aria-expanded') === 'true';
-      if (!open) return;
+    document.addEventListener('pointerdown', (e) => {
+      if (!isOpen()) return;
       if (!mobile.contains(e.target) && !burger.contains(e.target)) close();
     });
 
