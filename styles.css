@@ -23,6 +23,10 @@
 
   --accent-green:#2f8f54;
   --accent-red:#bd3038;
+
+  --step--1:clamp(0.95rem, 0.9rem + 0.15vw, 1.02rem);
+  --step-0:clamp(1rem, 0.98rem + 0.2vw, 1.12rem);
+  --step-1:clamp(1.15rem, 1.06rem + 0.45vw, 1.35rem);
 }
 
 body[data-theme="dark"]{
@@ -54,6 +58,8 @@ body{
   color:var(--text);
   overflow-x:hidden;
   animation: pageIn .45s ease both;
+  font-size:var(--step-0);
+  line-height:1.6;
 }
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
 @keyframes bgDrift{from{background-position:0 0, 0 0, 0 0}to{background-position:18px -8px, -18px 12px, 0 0}}
@@ -278,8 +284,8 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 }
 h1{
   margin:0 0 14px;
-  font-size: clamp(38px, 4.2vw, 56px);
-  line-height:1.03;
+  font-size: clamp(42px, 4.4vw, 62px);
+  line-height:1.02;
   letter-spacing:-.02em;
 }
 .grad{
@@ -301,10 +307,10 @@ body[data-theme="dark"] .grad{
 }
 .lead{
   margin:0 0 18px;
-  font-size:16px;
-  line-height:1.65;
+  font-size:var(--step-1);
+  line-height:1.72;
   color:rgba(15,17,21,.72);
-  max-width: 54ch;
+  max-width: 58ch;
 }
 .hero__actions{display:flex; gap:12px; flex-wrap:wrap}
 
@@ -319,8 +325,8 @@ body[data-theme="dark"] .grad{
   transition: transform .2s ease, background .2s ease;
 }
 .trust__item:hover{transform: translateX(4px); background: rgba(255,255,255,.95)}
-.trust__item strong{display:block; font-size:13px}
-.trust__item small{display:block; color:var(--muted); margin-top:2px; font-size:12px}
+.trust__item strong{display:block; font-size:14px}
+.trust__item small{display:block; color:var(--muted); margin-top:2px; font-size:13px}
 .dot{
   width:10px; height:10px; border-radius:999px;
   background: linear-gradient(135deg, rgba(15,17,21,.98), rgba(59,63,71,.92));
@@ -343,8 +349,8 @@ body[data-theme="dark"] .grad{
   display:grid;
   gap:2px;
 }
-.hero-kpi strong{font-size:13px; letter-spacing:.01em}
-.hero-kpi span{font-size:11px; color:var(--muted); line-height:1.35}
+.hero-kpi strong{font-size:14px; letter-spacing:.01em}
+.hero-kpi span{font-size:12px; color:var(--muted); line-height:1.45}
 
 /* Hero media */
 .hero__media{position:relative}
@@ -362,7 +368,9 @@ body[data-theme="dark"] .grad{
 .media-card img,
 .media-card video{
   width:100%;
-  height: 460px;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 420px;
   object-fit: cover;
   transform: scale(1.02);
   transition: transform .6s ease;
@@ -402,7 +410,7 @@ body[data-theme="dark"] .grad{
 .stat-card{
   position:absolute;
   right:-16px; top:-18px;
-  width: 200px;
+  width: 220px;
   padding:16px 16px 14px;
   border-radius: 26px;
   border:1px solid var(--line2);
@@ -421,9 +429,9 @@ body[data-theme="dark"] .grad{
 }
 .stat-card__label{
   margin-top:8px;
-  font-size:12px;
+  font-size:13px;
   color:rgba(15,17,21,.68);
-  line-height:1.4;
+  line-height:1.45;
 }
 
 /* Sections */
@@ -499,11 +507,11 @@ body[data-theme="dark"] .section--benefits .card__icon{
 .intro-block__lead{max-width:58ch}
 h2{
   margin:0;
-  font-size: clamp(28px, 3vw, 40px);
-  line-height:1.12;
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height:1.14;
   letter-spacing:-.02em;
 }
-.muted{margin:0; color:var(--muted); line-height:1.65}
+.muted{margin:0; color:var(--muted); line-height:1.72; font-size:var(--step-0)}
 
 .portrait-media{
   position:relative;
@@ -512,9 +520,10 @@ h2{
   border:1px solid var(--line2);
   background:rgba(255,255,255,.85);
   box-shadow:var(--shadow2);
-  min-height:460px;
+  min-height:420px;
+  aspect-ratio: 4 / 3;
 }
-.portrait-media img{width:100%; height:100%; min-height:460px; object-fit:cover}
+.portrait-media img{width:100%; height:100%; min-height:420px; object-fit:cover}
 .portrait-media::after{
   content:"";
   position:absolute;
@@ -557,8 +566,8 @@ h2{
   transition:transform .22s ease, border-color .22s ease;
 }
 .value-card:hover{transform:translateY(-3px); border-color:var(--line2)}
-.value-card h3{margin:0 0 7px; font-size:16px}
-.value-card p{margin:0; color:rgba(15,17,21,.72); line-height:1.55; font-size:14px}
+.value-card h3{margin:0 0 7px; font-size:18px}
+.value-card p{margin:0; color:rgba(15,17,21,.72); line-height:1.62; font-size:15px}
 .value-card__icon{
   width:42px;
   height:42px;
@@ -613,7 +622,7 @@ h2{
 }
 .card__icon img{width:26px; height:26px; opacity:.92}
 .card h3{margin:0 0 8px; font-size:18px}
-.card p{margin:0; color:rgba(15,17,21,.70); line-height:1.65}
+.card p{margin:0; color:rgba(15,17,21,.70); line-height:1.7; font-size:15px}
 
 /* Capacity */
 .capacity{
@@ -665,7 +674,7 @@ h2{
   border-radius:999px;
   background: linear-gradient(135deg, rgba(15,17,21,.98), rgba(59,63,71,.92));
 }
-.mini p{margin:0; color:rgba(15,17,21,.70); font-size:13px; line-height:1.55}
+.mini p{margin:0; color:rgba(15,17,21,.70); font-size:14px; line-height:1.62}
 
 .section-split{
   margin-top:24px;
@@ -737,7 +746,9 @@ h2{
 .shot:hover{transform: translateY(-4px); box-shadow: 0 20px 40px rgba(15,17,21,.1)}
 .shot img{
   width:100%;
-  height: 420px;
+  height: 100%;
+  min-height: 360px;
+  aspect-ratio: 16 / 10;
   object-fit:cover;
   transform: scale(1.02);
   transition: transform .5s ease;
@@ -867,8 +878,11 @@ h2{
   gap:16px;
   align-items:start;
 }
-.faq-layout .portrait-media{min-height:100%}
-.faq-layout .portrait-media img{min-height:540px}
+.faq-layout .portrait-media,
+.faq-layout .portrait-media img{
+  aspect-ratio: 3 / 4;
+  min-height: 520px;
+}
 .faq-cards{
   grid-column:1 / -1;
   display:grid;
@@ -885,7 +899,7 @@ h2{
   border:0;
   background: transparent;
   color:rgba(15,17,21,.9);
-  font-size:16px;
+  font-size:17px;
   line-height:1.55;
   font-weight:600;
   letter-spacing:.002em;
@@ -897,7 +911,7 @@ h2{
 .acc-panel p{
   margin:0;
   color:rgba(15,17,21,.78);
-  font-size:16px;
+  font-size:17px;
   line-height:1.55;
   font-weight:500;
   letter-spacing:.002em;
@@ -1006,30 +1020,6 @@ input:focus, textarea:focus{
 .delay-4{transition-delay:.32s}
 .section-fade{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease}
 .section-fade.in{opacity:1; transform:translateY(0)}
-
-/* Responsive */
-@media (max-width: 980px){
-  .hero__grid{grid-template-columns:1fr; gap:18px}
-  .section__head{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .capacity{grid-template-columns:1fr}
-  .gallery-slider{padding:12px}
-  .video-showcase{grid-template-columns:1fr}
-  .shot img{height:280px}
-  .capacity__grid{grid-template-columns:1fr}
-  .contact{grid-template-columns:1fr}
-
-  .nav, .topbar__cta{display:none}
-  .burger{display:block}
-
-  /* show dropdown only on mobile and only when not hidden */
-  .mobile:not([hidden]){display:grid}
-  .stat-card{right:10px; top:10px}
-  .hero-kpis{grid-template-columns:1fr}
-  .media-card img,
-  .media-card video{height:380px}
-  .mini{min-width:100%; flex-basis:100%}
-}
 
 @media (prefers-reduced-motion: reduce){
   .reveal{transition:none}
@@ -1238,12 +1228,13 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   .container{width:min(1120px, calc(100% - 28px))}
   .hero{padding:74px 0 28px}
   h1{font-size:clamp(34px, 9.5vw, 46px); line-height:1.06}
-  .lead{font-size:17px; line-height:1.72}
+  h2{font-size:clamp(28px, 7.2vw, 36px)}
+  .lead{font-size:1.05rem; line-height:1.72}
   .hero__actions{gap:10px}
   .hero__actions .btn{width:100%}
   .hero__media{margin-top:8px}
   .media-card img,
-  .media-card video{height:320px}
+  .media-card video{min-height:340px; aspect-ratio: 4 / 3}
   .media-card__badge{left:12px; bottom:12px; font-size:11px}
   .stat-card{position:relative; right:auto; top:auto; width:100%; margin-top:12px; border-radius:20px}
   .section{padding:66px 0}
@@ -1260,16 +1251,16 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   .value-points,
   .faq-cards{grid-template-columns:1fr}
   .portrait-media,
-  .portrait-media img{min-height:330px}
+  .portrait-media img{min-height:320px; aspect-ratio:4/3}
   .faq-layout .portrait-media{order:-1}
-  .faq-layout .portrait-media img{min-height:320px}
+  .faq-layout .portrait-media img{min-height:360px; aspect-ratio:3/4}
   .float-badge{top:auto; right:12px; bottom:12px}
   .capacity-slider{grid-template-columns:1fr; gap:8px}
   .industry-nav{display:none}
-  .mini{min-width:86%; flex-basis:86%}
+  .mini{min-width:100%; flex-basis:100%}
   .gallery-slider{padding:10px}
   .gallery-track{min-height:310px}
-  .shot img{height:300px}
+  .shot img{min-height:280px; aspect-ratio:4/3}
   .testimonials-marquee{-webkit-mask-image:none; mask-image:none}
   .quote{width:min(320px, calc(100vw - 52px)); padding:18px 16px}
   .accordion{border-radius:28px}
