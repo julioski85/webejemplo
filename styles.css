@@ -292,7 +292,7 @@ code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberat
 .hero{padding:var(--space-6) 0 var(--space-5)}
 .hero__grid{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.08fr .92fr;
   gap:var(--section-gap);
   align-items:stretch;
 }
@@ -330,7 +330,7 @@ body[data-theme="dark"] .grad{
   font-size:var(--step-1);
   line-height:1.62;
   color:rgba(15,17,21,.72);
-  max-width: 58ch;
+  max-width: 64ch;
 }
 .hero__actions{display:flex; gap:var(--space-2); flex-wrap:wrap}
 
@@ -401,15 +401,15 @@ body[data-theme="dark"] .grad{
 }
 
 .media-frame--split{
-  min-height:var(--media-height-section);
-  height:var(--media-height-section);
-  max-height:var(--media-height-section);
+  min-height:100%;
+  height:100%;
+  max-height:none;
 }
 
 .media-frame--faq{
-  min-height:var(--media-height-faq);
-  height:var(--media-height-faq);
-  max-height:var(--media-height-faq);
+  min-height:100%;
+  height:100%;
+  max-height:none;
 }
 
 .media-frame > img,
@@ -563,7 +563,9 @@ body[data-theme="dark"] .section--benefits .card__icon{
 .section__head--split > .media-frame,
 .section-split > .media-frame,
 .faq-layout > .media-frame{
+  min-height:100%;
   height:100%;
+  max-height:none;
 }
 .section__head--mini{grid-template-columns:1fr; margin:var(--space-3) 0 var(--space-4)}
 .intro-block{display:grid; gap:14px}
@@ -925,9 +927,9 @@ h2{
 }
 .faq-layout{
   display:grid;
-  grid-template-columns:.7fr 1.3fr;
+  grid-template-columns:.85fr 1.15fr;
   gap:var(--section-gap);
-  align-items:stretch;
+  align-items:center;
 }
 .faq-cards{
   grid-column:1 / -1;
