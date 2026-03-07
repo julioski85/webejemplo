@@ -1219,6 +1219,15 @@ body[data-theme="dark"] .theme-toggle{border-color:rgba(255,255,255,.35); backgr
 
 
 .floating-cta__icon svg{width:18px;height:18px;color:#fff}
+.floating-cta::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  background:var(--accent-green);
+  box-shadow:10px 0 0 var(--accent-red);
+}
+
 .modal{
   position:fixed;
   inset:0;
