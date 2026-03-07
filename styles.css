@@ -1344,7 +1344,8 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   .lead{font-size:1rem; line-height:1.58}
   .hero__actions{gap:10px}
   .hero__actions .btn{width:100%}
-  .hero__media{margin-top:8px}
+  .hero__grid > *{min-height:0}
+  .hero__media{margin-top:8px; align-self:start}
   .hero__media .media-frame--hero,
   .section__head--split > .portrait-media,
   .section-split > .portrait-media{
@@ -1373,7 +1374,7 @@ body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
   }
   .media-frame{
     min-height:clamp(240px, 34vh, 340px);
-    height:100%;
+    height:auto;
     max-height:clamp(300px, 52vh, 460px);
   }
   .media-frame--hero{
