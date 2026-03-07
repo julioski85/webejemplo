@@ -65,17 +65,24 @@
   };
 
   if (burger && mobile) {
+    const isMobileView = () => window.matchMedia('(max-width: 980px)').matches;
+
     const close = () => {
       burger.setAttribute('aria-expanded', 'false');
       mobile.hidden = true;
+      burger.setAttribute('aria-label', 'Abrir menú');
+      document.body.classList.remove('menu-open');
       setBurgerX(false);
     };
 
     burger.addEventListener('click', (e) => {
       e.stopPropagation();
+      if (!isMobileView()) return;
       const expanded = burger.getAttribute('aria-expanded') === 'true';
       burger.setAttribute('aria-expanded', String(!expanded));
       mobile.hidden = expanded;
+      burger.setAttribute('aria-label', expanded ? 'Abrir menú' : 'Cerrar menú');
+      document.body.classList.toggle('menu-open', !expanded);
       setBurgerX(!expanded);
     });
 
@@ -90,6 +97,12 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
     });
+
+    window.addEventListener('resize', () => {
+      if (!isMobileView()) close();
+    });
+
+    close();
   }
 
   // Reveal on scroll
