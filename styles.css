@@ -905,6 +905,13 @@ h2{
 .section-split--fabrication .feature-grid--fabrication .feature-card:last-child{
   grid-column:1 / -1;
 }
+.section-split__cta{
+  margin-top:var(--space-3);
+  display:flex;
+}
+.section-split__cta .btn{
+  width:fit-content;
+}
 .section-split--reverse .feature-card{align-items:start}
 .feature-grid--operations{
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -978,6 +985,9 @@ h2{
   border-radius:18px;
   background:rgba(255,255,255,.78);
   padding:8px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:8px;
 }
 .ops-mini-slide{
   margin:0;
@@ -1661,6 +1671,8 @@ body[data-theme="dark"] .hero .btn--ghost-light{
     min-height:132px;
     padding:7px;
     border-radius:16px;
+    grid-template-columns:1fr;
+    gap:7px;
   }
   .ops-mini-slide{
     min-height:118px;
