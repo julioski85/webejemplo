@@ -274,6 +274,32 @@
     resetAuto();
   }
 
+  // Mini slider for operational benefits
+  const opsMiniSlider = document.querySelector('[data-ops-mini-slider]');
+  if (opsMiniSlider) {
+    const slides = Array.from(opsMiniSlider.querySelectorAll('.ops-mini-slide'));
+    let idx = 0;
+    let timer;
+
+    const render = (nextIndex) => {
+      idx = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === idx);
+      });
+    };
+
+    const resetAuto = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => render(idx + 1), 2600);
+    };
+
+    opsMiniSlider.addEventListener('pointerenter', () => window.clearInterval(timer));
+    opsMiniSlider.addEventListener('pointerleave', resetAuto);
+
+    render(0);
+    resetAuto();
+  }
+
 
   // Industries horizontal slider (auto + arrows)
   const industries = document.querySelector('[data-industries-slider]');
