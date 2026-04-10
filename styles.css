@@ -970,6 +970,31 @@ h2{
 .icon-pill img{width:15px; height:15px; opacity:.88}
 .capacity-highlight{margin:12px 0 0; min-height:185px}
 .capacity-highlight img{width:100%; height:100%; object-fit:cover}
+.ops-mini-slider{
+  margin-top:12px;
+  position:relative;
+  min-height:145px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  padding:8px;
+}
+.ops-mini-slide{
+  margin:0;
+  display:none;
+  min-height:130px;
+  height:130px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  animation: fadeSlide .4s ease;
+}
+.ops-mini-slide.is-active{display:block}
+.ops-mini-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
 
 .hero__grid > *{min-height:100%}
@@ -1632,6 +1657,16 @@ body[data-theme="dark"] .hero .btn--ghost-light{
     min-height:220px;
   }
   .capacity-highlight{min-height:160px}
+  .ops-mini-slider{
+    min-height:132px;
+    padding:7px;
+    border-radius:16px;
+  }
+  .ops-mini-slide{
+    min-height:118px;
+    height:118px;
+    border-radius:12px;
+  }
   .value-points,
   .faq-cards{grid-template-columns:1fr}
   .hero-kpis{grid-template-columns:repeat(2, minmax(0,1fr)); margin-top:var(--space-4); padding:14px; gap:12px}
