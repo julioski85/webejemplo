@@ -1722,6 +1722,12 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .footer__left,
   .footer__right{justify-content:center; text-align:center}
   .hero-kpis{grid-template-columns:1fr}
+  .feature-grid--operations{
+    grid-template-columns:1fr;
+  }
+  .feature-grid--operations .feature-card{
+    grid-column:auto;
+  }
   .media-frame--hero{
     min-height:clamp(220px, 34vh, 300px);
     max-height:clamp(260px, 46vh, 360px);
@@ -1742,6 +1748,31 @@ body[data-theme="dark"] .hero .btn--ghost-light{
     font-size:13px;
     gap:7px;
     justify-content:flex-start;
+  }
+  .footer{
+    padding:18px 0 22px;
+  }
+  .footer__inner{
+    gap:8px;
+  }
+  .footer__left{
+    gap:8px;
+    flex-direction:column;
+  }
+  .footer-logo{
+    height:28px;
+  }
+  .footer__left .muted{
+    margin:0;
+    font-size:12px;
+  }
+  .footer__right{
+    gap:6px;
+    font-size:12px;
+    flex-wrap:wrap;
+  }
+  .footer__right .sep{
+    display:none;
   }
   .section--vector::after,
   .section--soft::after,
