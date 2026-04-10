@@ -1683,7 +1683,7 @@ body[data-theme="dark"] .hero .btn--ghost-light{
     min-height:132px;
     padding:7px;
     border-radius:16px;
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:7px;
   }
   .ops-mini-slide{
