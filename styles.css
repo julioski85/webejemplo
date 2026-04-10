@@ -717,6 +717,33 @@ h2{
   animation:badgePulse 2.8s ease-in-out infinite;
 }
 .float-badge svg{width:15px; height:15px}
+
+
+.media-sound-toggle{
+  position:absolute;
+  left:16px;
+  bottom:16px;
+  z-index:4;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.88);
+  color:#1f2531;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.media-sound-toggle:hover{transform:translateY(-1px); background:#fff}
+
+.media-sound-toggle.is-on{
+  background:linear-gradient(120deg, rgba(168,32,54,.95), rgba(138,22,40,.95));
+  color:#fff;
+  border-color:rgba(138,22,40,.75);
+}
 @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(15,17,21,.08)}50%{box-shadow:0 0 0 7px rgba(15,17,21,0)}}
 
 .value-points{
@@ -734,11 +761,11 @@ h2{
   transition:transform .22s ease, border-color .22s ease;
 }
 .value-card:hover{transform:translateY(-3px); border-color:var(--line2)}
-.value-card h3{margin:0 0 6px; font-size:1.08rem; line-height:1.35}
+.value-card h3{margin:0 0 6px; font-size:1.2rem; line-height:1.32; color:#8f1d2c}
 .value-card p{margin:0; color:rgba(15,17,21,.72); line-height:1.58; font-size:.95rem}
 .value-card__icon{
-  width:42px;
-  height:42px;
+  width:52px;
+  height:52px;
   border-radius:14px;
   display:grid;
   place-items:center;
@@ -746,7 +773,7 @@ h2{
   background:rgba(15,17,21,.05);
   border:1px solid var(--line);
 }
-.value-card__icon svg{width:19px; height:19px}
+.value-card__icon svg{width:24px; height:24px}
 
 /* Cards */
 .cards{
@@ -1428,6 +1455,8 @@ body[data-theme="dark"] .value-card p,
 body[data-theme="dark"] .feature-card p,
 body[data-theme="dark"] .float-badge{color:#e7edf5}
 body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
+body[data-theme="dark"] .media-sound-toggle{background:rgba(17,22,29,.86); color:#eef3fb; border-color:rgba(255,255,255,.2)}
+body[data-theme="dark"] .media-sound-toggle:hover{background:rgba(24,31,41,.95)}
 body[data-theme="dark"] .hero .btn--ghost-light{
   background:rgba(10,14,20,.56);
   color:var(--text-dark);
@@ -1543,6 +1572,7 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .gallery-track{min-height:clamp(260px, 34vh, 360px)}
   .gallery-slide{min-height:clamp(260px, 34vh, 360px); height:clamp(260px, 34vh, 360px)}
   .float-badge{top:auto; right:12px; bottom:12px}
+  .media-sound-toggle{left:12px; bottom:12px; padding:7px 12px; font-size:.78rem}
   .capacity-slider{grid-template-columns:1fr; gap:8px}
   .industry-nav{display:none}
   .mini{min-width:100%; flex-basis:100%}

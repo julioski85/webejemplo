@@ -155,6 +155,45 @@
     video.addEventListener('canplay', () => safePlay(video), { once: true });
   });
 
+
+
+  // YouTube sound toggle for workflow video
+  const soundToggleButtons = Array.from(document.querySelectorAll('[data-sound-toggle]'));
+  soundToggleButtons.forEach((button) => {
+    const targetId = button.getAttribute('data-target-video');
+    const iframe = targetId ? document.getElementById(targetId) : null;
+    if (!iframe || !(iframe instanceof HTMLIFrameElement)) return;
+
+    let isMuted = true;
+    const postCommand = (func) => {
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({ event: 'command', func, args: [] }),
+        '*'
+      );
+    };
+
+    const syncLabel = () => {
+      button.classList.toggle('is-on', !isMuted);
+      button.setAttribute('aria-pressed', String(!isMuted));
+      button.setAttribute('aria-label', isMuted ? 'Activar sonido del video' : 'Silenciar sonido del video');
+      button.textContent = isMuted ? '🔇 Activar sonido' : '🔊 Silenciar sonido';
+    };
+
+    iframe.addEventListener('load', () => {
+      postCommand('mute');
+      postCommand('playVideo');
+    });
+
+    button.addEventListener('click', () => {
+      isMuted = !isMuted;
+      postCommand(isMuted ? 'mute' : 'unMute');
+      postCommand('playVideo');
+      syncLabel();
+    });
+
+    syncLabel();
+  });
+
   // Subtle background movement for a more dynamic feel
   const orb1 = document.querySelector('.orb-1');
   const orb2 = document.querySelector('.orb-2');
