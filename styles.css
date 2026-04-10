@@ -1660,6 +1660,17 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .section-split__copy h3{font-size:1.42rem}
   .feature-grid--fabrication,
   .feature-grid--operations{grid-template-columns:1fr}
+
+  .feature-grid--operations{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .feature-grid--operations .feature-card,
+  .feature-grid--operations .feature-card:last-child{
+    grid-column:auto;
+    width:100%;
+  }
   .feature-visuals{grid-template-columns:1fr 1fr}
   .feature-visual--large{
     grid-column:1 / -1;
