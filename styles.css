@@ -735,7 +735,13 @@ h2{
   cursor:pointer;
   backdrop-filter:blur(8px);
   transition:transform .2s ease, background .2s ease, color .2s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
 }
+.media-sound-toggle__icon{width:18px; height:18px; display:inline-flex}
+.media-sound-toggle__icon svg{width:18px; height:18px}
+.media-sound-toggle__label{line-height:1}
 
 .media-sound-toggle:hover{transform:translateY(-1px); background:#fff}
 
@@ -762,6 +768,8 @@ h2{
 }
 .value-card:hover{transform:translateY(-3px); border-color:var(--line2)}
 .value-card h3{margin:0 0 6px; font-size:1.2rem; line-height:1.32; color:#8f1d2c}
+.value-card--title-red h3{color:var(--accent-red)}
+.value-card--title-green h3{color:var(--accent-green)}
 .value-card p{margin:0; color:rgba(15,17,21,.72); line-height:1.58; font-size:.95rem}
 .value-card__icon{
   width:52px;
@@ -891,7 +899,19 @@ h2{
 .section-split__copy h3{margin:0 0 var(--space-2); font-size:var(--heading-3); line-height:1.25; letter-spacing:-.02em}
 .section-split__lead{margin-bottom:var(--space-4)}
 .section-split--fabrication .feature-grid{gap:var(--space-2)}
+.section-split--fabrication .feature-grid--fabrication{
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+.section-split--fabrication .feature-grid--fabrication .feature-card:last-child{
+  grid-column:1 / -1;
+}
 .section-split--reverse .feature-card{align-items:start}
+.feature-grid--operations{
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+.feature-grid--operations .feature-card:last-child{
+  grid-column:1 / -1;
+}
 .feature-grid{display:grid; gap:10px}
 .feature-card{
   padding:var(--space-3);
@@ -959,6 +979,7 @@ h2{
 .section__head--split > figure{display:flex}
 .section-split > figure > img,
 .section__head--split > figure > img{flex:1}
+.section-split > *{height:100%}
 /* Gallery */
 .gallery-slider{
   border:1px solid var(--line);
@@ -1602,6 +1623,8 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .faq-layout{grid-template-columns:1fr}
   .section-split__copy{padding:var(--space-4)}
   .section-split__copy h3{font-size:1.42rem}
+  .feature-grid--fabrication,
+  .feature-grid--operations{grid-template-columns:1fr}
   .feature-visuals{grid-template-columns:1fr 1fr}
   .feature-visual--large{
     grid-column:1 / -1;
