@@ -1658,6 +1658,7 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .faq-layout{grid-template-columns:1fr}
   .section-split__copy{padding:var(--space-4)}
   .section-split__copy h3{font-size:1.42rem}
+  .section-split--fabrication .feature-grid--fabrication,
   .feature-grid--fabrication,
   .feature-grid--operations{grid-template-columns:1fr}
 
