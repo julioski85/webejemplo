@@ -674,6 +674,24 @@ h2{
   margin:0;
   border-radius:var(--radius-lg);
 }
+
+.portrait-media--short{
+  aspect-ratio:9 / 16;
+  width:min(100%, 420px);
+  margin-inline:auto;
+  min-height:clamp(420px, 65vh, 760px);
+  max-height:none;
+}
+
+.portrait-media--short > iframe{
+  pointer-events:none;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:177.78%;
+  height:100%;
+  transform:translate(-50%, -50%);
+}
 .portrait-media::after{
   content:"";
   position:absolute;
