@@ -919,6 +919,38 @@ h2{
 .feature-card h4{margin:0 0 4px; font-size:.95rem; line-height:1.35}
 .feature-card p{margin:0; color:rgba(15,17,21,.72); font-size:.9rem; line-height:1.5}
 
+.feature-visuals{
+  margin-top:var(--space-3);
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:10px;
+}
+.feature-visual{margin:0; min-height:130px}
+.feature-visual img{width:100%; height:100%; object-fit:cover}
+.feature-visual--large{grid-row:span 2; min-height:272px}
+
+.icon-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 var(--space-3);
+}
+.icon-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:999px;
+  padding:7px 11px;
+  background:rgba(15,17,21,.05);
+  border:1px solid var(--line);
+  font-size:.78rem;
+  font-weight:600;
+  color:rgba(15,17,21,.76);
+}
+.icon-pill img{width:15px; height:15px; opacity:.88}
+.capacity-highlight{margin:12px 0 0; min-height:185px}
+.capacity-highlight img{width:100%; height:100%; object-fit:cover}
+
 
 .hero__grid > *{min-height:100%}
 .section__head--split,
@@ -1454,6 +1486,12 @@ body[data-theme="dark"] .faq-layout .accordion{background:rgba(255,255,255,.04)}
 body[data-theme="dark"] .value-card p,
 body[data-theme="dark"] .feature-card p,
 body[data-theme="dark"] .float-badge{color:#e7edf5}
+body[data-theme="dark"] .icon-pill{
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.84);
+  border-color:rgba(255,255,255,.2);
+}
+body[data-theme="dark"] .icon-pill img{opacity:.95}
 body[data-theme="dark"] .float-badge{background:rgba(17,22,29,.76)}
 body[data-theme="dark"] .media-sound-toggle{background:rgba(17,22,29,.86); color:#eef3fb; border-color:rgba(255,255,255,.2)}
 body[data-theme="dark"] .media-sound-toggle:hover{background:rgba(24,31,41,.95)}
@@ -1564,6 +1602,13 @@ body[data-theme="dark"] .hero .btn--ghost-light{
   .faq-layout{grid-template-columns:1fr}
   .section-split__copy{padding:var(--space-4)}
   .section-split__copy h3{font-size:1.42rem}
+  .feature-visuals{grid-template-columns:1fr 1fr}
+  .feature-visual--large{
+    grid-column:1 / -1;
+    grid-row:auto;
+    min-height:220px;
+  }
+  .capacity-highlight{min-height:160px}
   .value-points,
   .faq-cards{grid-template-columns:1fr}
   .hero-kpis{grid-template-columns:repeat(2, minmax(0,1fr)); margin-top:var(--space-4); padding:14px; gap:12px}
