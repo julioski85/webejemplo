@@ -280,11 +280,16 @@
     const slides = Array.from(opsMiniSlider.querySelectorAll('.ops-mini-slide'));
     let idx = 0;
     let timer;
+    const mobileMedia = window.matchMedia('(max-width: 900px)');
+
+    const getVisibleCount = () => (mobileMedia.matches ? 1 : 2);
 
     const render = (nextIndex) => {
       idx = (nextIndex + slides.length) % slides.length;
+      const visibleCount = getVisibleCount();
       slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle('is-active', slideIndex === idx);
+        const offset = (slideIndex - idx + slides.length) % slides.length;
+        slide.classList.toggle('is-active', offset < visibleCount);
       });
     };
 
@@ -295,6 +300,7 @@
 
     opsMiniSlider.addEventListener('pointerenter', () => window.clearInterval(timer));
     opsMiniSlider.addEventListener('pointerleave', resetAuto);
+    mobileMedia.addEventListener('change', () => render(idx));
 
     render(0);
     resetAuto();
