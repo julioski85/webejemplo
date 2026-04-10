@@ -176,7 +176,25 @@
       button.classList.toggle('is-on', !isMuted);
       button.setAttribute('aria-pressed', String(!isMuted));
       button.setAttribute('aria-label', isMuted ? 'Activar sonido del video' : 'Silenciar sonido del video');
-      button.textContent = isMuted ? '🔇 Activar sonido' : '🔊 Silenciar sonido';
+      button.innerHTML = isMuted
+        ? `
+          <span class="media-sound-toggle__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 14V10C5 9.4 5.4 9 6 9H9L13.4 5.6C13.9 5.2 14.6 5.6 14.6 6.2V17.8C14.6 18.4 13.9 18.8 13.4 18.4L9 15H6C5.4 15 5 14.6 5 14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M18.8 10.2L16.2 12.8M16.2 10.2L18.8 12.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="media-sound-toggle__label">Activar sonido</span>
+        `
+        : `
+          <span class="media-sound-toggle__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 14V10C5 9.4 5.4 9 6 9H9L13.4 5.6C13.9 5.2 14.6 5.6 14.6 6.2V17.8C14.6 18.4 13.9 18.8 13.4 18.4L9 15H6C5.4 15 5 14.6 5 14Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M17.2 9.2C18.7 10.7 18.7 13.3 17.2 14.8M19.8 6.6C22.7 9.5 22.7 14.5 19.8 17.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="media-sound-toggle__label">Silenciar sonido</span>
+        `;
     };
 
     iframe.addEventListener('load', () => {
